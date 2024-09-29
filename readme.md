@@ -1,4 +1,3 @@
-Here’s your note for **SysDash** with professional emojis added for a more engaging presentation:
 
 ---
 
