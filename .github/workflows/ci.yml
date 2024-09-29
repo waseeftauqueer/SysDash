@@ -16,7 +16,7 @@ jobs:
     - name: Run System Monitor Script
       run: |
         chmod +x system_monitor.sh  # Make the script executable
-        ./system_monitor.sh          # Run the script
+        timeout 60s ./system_monitor.sh          # Run the script
 
     # Step for setting up and running Python script
     - name: Set up Python
