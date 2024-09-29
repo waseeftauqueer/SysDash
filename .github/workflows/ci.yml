@@ -1,0 +1,42 @@
+name: CI Workflow
+
+on:
+  pull_request:
+    branches: [ master ]  # Runs on pull requests to the master branch
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    # Step for running the Bash script
+    - name: Run System Monitor Script
+      run: |
+        chmod +x system_monitor.sh  # Make the script executable
+        ./system_monitor.sh          # Run the script
+
+    # Step for setting up and running Python script
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'  # Set the required version of Python
+
+    - name: Run Python Script
+      run: |
+        python3 system_monitor.py  # Run your Python script
+        # If you have tests, you can add:
+        # pytest tests/  # Uncomment this if you have tests to run
+
+    # Step for setting up and running C/C++ program
+    - name: Install Build Essentials
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential  # Install necessary packages for compiling C/C++
+
+    - name: Compile and Run C++ Program
+      run: |
+        g++ -o system_monitor system_monitor.cpp  # Compile your C++ file
+        ./system_monitor  # Run the compiled program
